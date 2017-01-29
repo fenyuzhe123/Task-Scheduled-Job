@@ -1,0 +1,1 @@
+powershell -version 2 .\Atom_Pricing_SetProductId.ps1 -User vmadmin -vCenter vcnorth.active.tan -UpdatePid $True

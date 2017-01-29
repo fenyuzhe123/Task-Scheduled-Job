@@ -1,0 +1,1 @@
+C:\WINDOWS\system32\WindowsPowerShell\v1.0\powershell.exe -NoLogo -NonInteractive -File "D:\schedule_jobs\UCSConfigurationBackup\ucsbackups.ps1"

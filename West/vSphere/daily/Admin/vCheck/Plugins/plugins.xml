@@ -1,0 +1,520 @@
+<pluginlist>
+    <plugin>
+        <name>Connection settings for vCenter</name>
+        <description>Connection Plugin for connecting to vSphere</description>
+        <author>Alan Renouf</author>
+        <version>1.2</version>
+        <href>http://virtu-al.net/vcheck/plugins/00%20Connection%20Plugin%20for%20vCenter.ps1</href>
+    </plugin>
+    <plugin>
+        <name>General Information</name>
+        <description>General details on the infrastructure</description>
+        <author>Alan Renouf, Frederic Martin</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/01%20General%20Information.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Snapshot Information</name>
+        <description>VMware snapshots which are kept for a long period of time may cause issues, filling up datastores and also may impact performance of the virtual machine.</description>
+        <author>Alan Renouf, Raphael Schitz</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/02%20Snapshot%20Information.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Datastore Information</name>
+        <description>Datastores which run out of space will cause impact on the virtual machines held on these datastores</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/03%20Datastore%20Information.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Map disk region event</name>
+        <description>These may occur due to VCB issues, check <a href='http://kb.vmware.com/kb/1007331' target='_blank'>this article</a> for more details</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/04%20Map%20disk%20region%20event.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Hosts in Maintenance Mode</name>
+        <description>Hosts held in Maintenance mode will not be running any virtual machine worloads, check the below Hosts are in an expected state</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/05%20Hosts%20in%20Maintenance%20mode.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Hosts Not responding or Disconnected</name>
+        <description>Hosts which are in a disconnected state will not be running any virtual machine worloads, check the below Hosts are in an expected state</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/06%20Hosts%20not%20responding%20or%20Disconnected.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Hosts Overcommit state</name>
+        <description>Overcommitted hosts may cause issues with performance if memory is not issued when needed, this may cause ballooning and swapping</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/07%20Hosts%20Overcommit%20State.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Hosts Dead Lun Path</name>
+        <description>Dead LUN Paths may cause issues with storage performance or be an indication of loss of redundancy</description>
+        <author>Alan Renouf, Frederic Martin</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/08%20Hosts%20Dead%20Lun%20Path.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Created or cloned VMs</name>
+        <description>The following VMs have been created over the last $($VMsNewRemovedAge) Days</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/09%20Created%20or%20cloned%20VMs.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Removed VMs</name>
+        <description>The following VMs have been removed/deleted over the last $($VMsNewRemovedAge) days</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/10%20Removed%20VMs.ps1</href>
+    </plugin>
+    <plugin>
+        <name>VMs with over $vCPU vCPUs</name>
+        <description>The following VMs have over $vCPU CPU(s) and may impact performance due to CPU scheduling</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/11%20VMs%20with%20over%20CPU%20Count.ps1</href>
+    </plugin>
+    <plugin>
+        <name>VMs Ballooning or Swapping</name>
+        <description>Ballooning and swapping may indicate a lack of memory or a limit on a VM, this may be an indication of not enough memory in a host or a limit held on a VM, <a href='http://www.virtualinsanity.com/index.php/2010/02/19/performance-troubleshooting-vmware-vsphere-memory/' target='_blank'>further information is available here</a>.</description>
+        <author>Alan Renouf, Frederic Martin</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/12%20VMs%20Swapping%20or%20Ballooning.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Invalid or inaccessible VM</name>
+        <description>The following VMs are marked as inaccessible or invalid</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/13%20invalid%20or%20inaccessible%20VMs.ps1</href>
+    </plugin>
+    <plugin>
+        <name>VMs restarted due to Guest OS Error</name>
+        <description>The following VMs have been restarted by HA in the last $HAVMresetold days</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/14%20VMs%20restarted%20due%20to%20Guest%20OS%20Error.ps1</href>
+    </plugin>
+    <plugin>
+        <name>HA VMs restarted</name>
+        <description>The following VMs have been restarted by HA in the last $HAVMresetold days</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/15%20HA%20VMs%20restarted.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Host Swapfile datastores</name>
+        <description>The following hosts are in a cluster which is set to store the swapfile in the datastore specified by the host but no location has been set on the host</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/16%20Host%20Swapfile%20datastores.ps1</href>
+    </plugin>
+    <plugin>
+        <name>DRS Migrations</name>
+        <description>Multiple DRS Migrations may be an indication of overloaded hosts, check resouce levels of the cluster</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/17%20DRS%20Migrations.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Cluster Slot Sizes</name>
+        <description>Slot sizes in the below cluster are less than is specified, this may cause issues with creating new VMs, for more information click here: <a href='http://www.yellow-bricks.com/vmware-high-availability-deepdiv/' target='_blank'>Yellow-Bricks HA Deep Dive</a></description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/18%20Cluster%20Slot%20Sizes.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Guests with less than $MBFree MB</name>
+        <description>The following guests have less than $MBFree MB Free, if a guest disk fills up it may cause issues with the guest Operating System</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/19%20Guests%20with%20less%20than%20X%20MB%20free.ps1</href>
+    </plugin>
+    <plugin>
+        <name>ESXi with Technical Support mode or ESXi Shell enabled</name>
+        <description>The following ESXi Hosts have Technical support mode or ESXi Shell enabled, this may not be the best security option, see here for more information: <a href='http://www.yellow-bricks.com/2010/03/01/disable-tech-support-on-esxi/' target='_blank'>Yellow-Bricks Disable Tech Support on ESXi</a>.</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/20%20ESXi%20with%20Technical%20Support%20mode%20enabled.ps1</href>
+    </plugin>
+    <plugin>
+        <name>ESXi hosts which do not have Lockdown mode enabled</name>
+        <description>The following ESXi Hosts do not have lockdown enabled, think about using Lockdown as an extra security feature.</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/21%20ESXi%20hosts%20which%20do%20not%20have%20Lockdown%20mode%20enabled.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Checking VM Hardware Version</name>
+        <description>The following VMs are not at the latest hardware version, you may gain performance enhancements if you convert them to the latest version</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/22%20Checking%20VM%20Hardware%20Version.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Checking VI Events</name>
+        <description>The Following Errors were logged in the vCenter Events tab, you may wish to investigate these</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/23%20VI%20Events.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Checking Standard vSwitch Ports Free</name>
+        <description>The following standard vSwitches have less than $vSwitchLeft left</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/24%20vSwitch%20with%20less%20than%20x%20Ports%20Free.ps1</href>
+    </plugin>
+    <plugin>
+        <name>VMs in inconsistent folders</name>
+        <description>The Following VM's are not stored in folders consistent to their names, this may cause issues when trying to locate them from the datastore manually</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/25%20VMs%20in%20inconsistent%20folders.ps1</href>
+    </plugin>
+    <plugin>
+        <name>NO VM Tools</name>
+        <description>The following VMs have No VMTools installed, for optimal configuration and performance these should be installed</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/26%20No%20VM%20Tools.ps1</href>
+    </plugin>
+    <plugin>
+        <name>VM Tools Issues</name>
+        <description>The following VMs have issues with VMTools, these should be checked and reinstalled if necessary</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/27%20VM%20Tools%20Issues.ps1</href>
+    </plugin>
+    <plugin>
+        <name>CD-Roms Connected</name>
+        <description>The following VMs have a CD-ROM connected, this may cause issues if this machine needs to be migrated to a different host</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/28%20CD-Roms%20Connected.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Floppys Connected</name>
+        <description>The following VMs have a floppy disk connected, this may cause issues if this machine needs to be migrated to a different host</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/29%20Floppy%20Drive%20Connected.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Single Storage VMs</name>
+        <description>The following VMs are located on storage which is only accesible by 1 host, these will not be compatible with VMotion and may be disconnected in the event of host failure</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/30%20Single%20storage%20VMs.ps1</href>
+    </plugin>
+    <plugin>
+        <name>NTP Name and Service</name>
+        <description>The following hosts do not have the correct NTP settings and may cause issues if the time becomes far apart from the vCenter/Domain or other hosts</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/31%20NTP%20Name%20and%20Service.ps1</href>
+    </plugin>
+    <plugin>
+        <name>VM CPU %RDY</name>
+        <description>The following VMs have high CPU RDY times, this can cause performance issues for more information please read <a href='http://communities.vmware.com/docs/DOC-7390' target='_blank'>This article</a></description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/32%20VM%20CPU%20Percent%20RDY.ps1</href>
+    </plugin>
+    <plugin>
+        <name>VM CPU Usage</name>
+        <description>The following VMs have high CPU usage and may have rogue guest processes or not enough CPU resource assigned</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/33%20VM%20CPU%20Usage.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Number of VMs per Datastore</name>
+        <description>The Maximum number of VMs per datastore is 256, the following VMs are above the defined $NumVMsPerDatastore and may cause performance issues</description>
+        <author>Alan Renouf, Frederic Martin</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/34%20Number%20of%20VMs%20per%20Datastore.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Host Configuration Issues</name>
+        <description>The following configuration issues have been registered against Hosts in vCenter</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/35%20Host%20Configuration%20Issues.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Host Alarms</name>
+        <description>The following alarms have been registered against hosts in vCenter</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/36%20Host%20Alarms.ps1</href>
+    </plugin>
+    <plugin>
+        <name>VM Alarms</name>
+        <description>The following alarms have been registered against VMs in vCenter</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/37%20VM%20Alarms.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Cluster Configuration Issues</name>
+        <description>The following alarms have been registered against clusters in vCenter</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/38%20Cluster%20Configuration%20Issues.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Datastore OverAllocation</name>
+        <description>The following datastores may be overcommitted it is strongly suggested you check these</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/39%20Datastore%20OverAllocation.ps1</href>
+    </plugin>
+    <plugin>
+        <name>VCB/Veeam/NetBackup Garbage</name>
+        <description>The following snapshots have been left over from using VCB/Veeam or Netbackup, you may wish to investigate if these are still needed</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/40%20VCB%20Garbage.ps1</href>
+    </plugin>
+    <plugin>
+        <name>VC Services</name>
+        <description>The following vCenter Services are not in the required state</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/41%20vCenter%20Services.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Windows vCenter Error Event Logs</name>
+        <description>The following errors were found in the vCenter Event Logs, you may wish to check these further</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/42%20Windows%20vCenter%20Error%20Event%20Logs.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Windows vCenter Warning Event Logs</name>
+        <description>The following warnings were found in the vCenter Event Logs, you may wish to check these further</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/43%20Windows%20vCenter%20Warning%20Event%20Logs.ps1</href>
+    </plugin>
+    <plugin>
+        <name>VMKernel Warnings</name>
+        <description>The following VMKernel issues were found, it is suggested all unknown issues are explored on the VMware Knowledge Base. Use the below links to automatically search for the string</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/44%20VMKernel%20Warnings.ps1</href>
+    </plugin>
+    <plugin>
+        <name>VMs needing snapshot consolidation</name>
+        <description>The following VMs have snapshots that failed to consolidate. See <a href='http://blogs.vmware.com/vsphere/2011/08/consolidate-snapshots.html' target='_blank'>this article</a> for more details</description>
+        <author>Luc Dekens</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/45%20VMs%20needing%20snapshot%20consolidation.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Missing ESX(i) updates and patches</name>
+        <description>The following updates and/or patches are not applied.</description>
+        <author>Luc Dekens</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/46%20Missing%20ESX%20patches.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Find clusters that have HA host monitoring disabled</name>
+        <description>The following clusters have HA host monitoring dsiabled</description>
+        <author>David Chung</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/47%20HAHostMonitoring.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Find VMs with thick or thin provisioned vmdk</name>
+        <description>The following VMs have have $diskformat provisioned vmdk(s)</description>
+        <author>David Chung</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/48%20FindVmDiskFormat.ps1</href>
+    </plugin>
+    <plugin>
+        <name>VMs with CPU or Memory Limits Configured</name>
+        <description>The following VMs have a CPU or Memory Limit configured which may impact the performance of the VM. Note: -1 indicates no limit</description>
+        <author>Jonathan Medd</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/50%20VMs%20with%20CPU%20or%20Memory%20Limits%20Configured.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Syslog Name</name>
+        <description>The following hosts do not have the correct Syslog settings which may cause issues if ESXi hosts experience issues and logs need to be investigated</description>
+        <author>Jonathan Medd</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/51%20Syslog%20Name.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Datastore Consistency</name>
+        <description>Virtual Machines residing on these datastores will not be able to run on all hosts in the cluster</description>
+        <author>Robert Sexstone</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/52%20Datastore%20Consistency.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Hardware status warnings/errors</name>
+        <description>Details can be found in the Hardware Status tab</description>
+        <author>Raphael Schitz</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/53%20Hardware%20status%20warnings-errors.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Guests with wrong OS</name>
+        <description>The following virtual machines contain operating systems other than the ones selected in the VM configuration.</description>
+        <author>Frederic Martin</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/54%20Guests%20with%20wrong%20OS.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Virtual machines with incorrect OS configuration</name>
+        <description>The following virtual machines have an installed OS that is different from the configured OS. This can impact the performance of the virtual machine.</description>
+        <author>Robert van den Nieuwendijk</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/54%20Virtual%20Machines%20with%20incorrect%20OS%20Configuration.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Clusters with DRS disabled</name>
+        <description>The following clusters have DRS disabled. This may impact the performance of your cluster.</description>
+        <author>Robert van den Nieuwendijk</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/55%20Clusters%20with%20DRS%20Disabled.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Clusters with HA disabled</name>
+        <description>The following clusters have HA disabled. This will impact your disaster recovery.</description>
+        <author>Robert van den Nieuwendijk</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/56%20Clusters%20with%20HA%20Disabled.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Hosts with reboot required</name>
+        <description>The following hosts require a reboot.</description>
+        <author>Robert van den Nieuwendijk</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/57%20Hosts%20with%20reboot%20required.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Virtual machines with less hard disks than partitions</name>
+        <description>Virtual machines with less hard disks than partitions probably have more than one partition on a hard disk.</description>
+        <author>Robert van den Nieuwendijk</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/58%20Virtual%20machines%20with%20less%20hard%20disks%20than%20partitions.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Datastores with Storage IO Control Disabled</name>
+        <description>Datastores with Storage I/O Control Disabled can impact the performance of your virtual machines.</description>
+        <author>Robert van den Nieuwendijk</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/59%20Datastores%20with%20Storage%20IO%20Control%20Disabled.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Powered Off VMs</name>
+        <description>May want to consider deleting VMs that have been powered off for more than 30 days</description>
+        <author>Adam Schwartzberg</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/60%20Powered%20Off%20VMs.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Guest OS Pivot table</name>
+        <description>List of Guest OS sum</description>
+        <author>Frederic Martin</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/61%20Guest%20OS%20Pivot%20table.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Unwanted virtual hardware found</name>
+        <description>Certain kinds of hardware are unwanted on virtual machines as they may cause unnecessary vMotion constraints.</description>
+        <author>Frederic Martin</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/62%20Unwanted%20virtual%20hardware.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Snapshot removed</name>
+        <description></description>
+        <author>Raphael Schitz, Frederic Martin</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/63%20Snapshot%20removed.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Snapshots Oversize</name>
+        <description></description>
+        <author>Raphael Schitz</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/64%20Snapshots%20Oversize.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Snapshot created</name>
+        <description></description>
+        <author>Raphael Schitz, Frederic Martin</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/65%20Snapshot%20created.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Mis-named virtual machines</name>
+        <description>The following guest names do not match the name inside of the guest.</description>
+        <author>Frederic Martin</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/66%20Misnamed%20VM.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Host Build versions in use</name>
+        <description>The following host builds are in use in this vCenter</description>
+        <author>Frederic Martin</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/67%20Host%20OS%20Pivot%20Table.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Disk Max Total Latency</name>
+        <description>Check vm per LUN dispatch and esxtop for very high values over $diskmaxtotallatency</description>
+        <author>Raphael Schitz, Frederic Martin</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/68%20Disk%20Max%20Total%20Latency.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Datastores in Maintenance Mode</name>
+        <description>Datastore held in Maintenance mode will not be hosting any virtual machine, check the below Datastore are in an expected state</description>
+        <author>Frederic Martin</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/69%20Datastores%20in%20Maintenance%20mode.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Cluster Node version</name>
+        <description>Display per cluster nodes version if unique or mismatch</description>
+        <author>Raphael Schitz, Frederic Martin</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/70%20Cluster%20Node%20Version.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Capacity Planning</name>
+        <description>The following gives brief capacity information for each cluster based on average CPU/Mem usage and counting for HA failover requirements</description>
+        <author>Raphael Schitz, Frederic Martin</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/71%20Capacity%20Planning.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Plugins not up to date or not installed</name>
+        <description>The following Plugins are not up to date or not installed</description>
+        <author>Alan Renouf, Jake Robinson, Frederic Martin</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/Plugins%20Not%20up%20to%20date%20or%20installed.ps1</href>
+    </plugin>
+    <plugin>
+        <name>Disconnecting from vCenter</name>
+        <description>The following Plugins are not up to date or not installed</description>
+        <author>Alan Renouf</author>
+        <version>1.1</version>
+        <href>http://virtu-al.net/vcheck/plugins/VeryLastPlugin%20Used%20to%20Disconnect.ps1</href>
+    </plugin>
+</pluginlist>

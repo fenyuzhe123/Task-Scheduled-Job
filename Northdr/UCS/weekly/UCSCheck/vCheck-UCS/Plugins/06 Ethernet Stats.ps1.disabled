@@ -1,0 +1,64 @@
+$Title = "Port Channel Uplink Stats"
+$Header =  "Port Channel Uplink Stats"
+$Comments = "Port Channel Uplink Stats"
+$Display = "Table"
+$Author = "Joshua Barton"
+$PluginVersion = 0.1
+$PluginCategory = "UCS"
+
+# Start of Settings
+# End of Settings
+
+$PortChanUpTable = @()
+
+$PortCollInt = ($StatCollPolicy | Where {$_.Dn -like "*coll-policy-port"}).CollectionInterval
+
+# Getting how often UCS is collecting port stats to determine sync status later
+If ($PortCollInt -like "*seconds") {
+	$NowTime = (Get-Date).AddMinutes(-1)
+} Else {
+	$NowTime = (Get-Date).AddMinutes(-($PortCollInt.SubString(0,1)))
+}
+
+
+Foreach ($EthPortCh in $EthPortChs) {
+	
+	# Temporary object to old Port Channel data
+	$Details = "" | Select-Object SwitchId, PortChannel, Interval, AvgTxMb, AvgRxMb, AvgTxPkts, AvgRxPkts, Errors, Loss, RxTimeColl, TxTimeColl, LossTimeColl, ErrorTimeColl, Sync
+	
+	# Gather statistic data
+	$EthRxStats = $EthPortCh | Get-UcsEtherRxStats
+	$EthTxStats = $EthPortCh | Get-UcsEtherTxStats
+	$EthLossStats = $EthPortCh | Get-UcsEtherLossStats
+	$EthErrorStats = $EthPortCh | Get-UcsEtherErrStats
+	
+	# Trim to use only relevant information
+	$SplitEthFab = (($EthRxStats.Dn).Split("/"))
+	
+	# Populate Details object
+	$Details.SwitchId = $SplitEthFab[2]
+	$Details.PortChannel = $SplitEthFab[3]
+	$Details.Interval = $PortCollInt
+	$Details.AvgTxMb = [int]($EthTxStats.TotalBytesDeltaAvg / 1048576)
+	$Details.AvgRxMb = [int]($EthRxStats.TotalBytesDeltaAvg / 1048576)
+	$Details.AvgTxPkts = $EthTxStats.TotalPacketsDeltaAvg
+	$Details.AvgRxPkts = $EthRxStats.TotalPacketsDeltaAvg
+	$Details.Errors = ($EthErrorStats.Align + $EthErrorStats.DefferedTx + $EthErrorStats.Fcs + $EthErrorStats.IntMacRx + $EthErrorStats.IntMacTx + $EthErrorStats.Rcv + $EthErrorStats.UnderSize + $EthErrorStats.Xmit)
+	$Details.Loss = ($EthLossStats.SQETest + $EthLossStats.CarrierSense + $EthLossStats.ExcessCollision + $EthLossStats.Giants + $EthLossStats.LateCollision + $EthLossStats.MultiCollision + $EthLossStats.SingleCollision + $EthLossStats.Symbol)
+	$Details.RxTimeColl = $EthRxStats.TimeCollected
+	$Details.TxTimeColl = $EthTxStats.TimeCollected
+	$Details.LossTimeColl = $EthLossStats.TimeCollected
+	$Details.ErrorTimeColl = $EthErrorStats.TimeCollected
+	
+	# Determine whether the last collected time matches up with the collection interval.
+	If (([DateTime]$EthRxStats.TimeCollected -ge $NowTime) -AND ([DateTime]$EthTxStats.TimeCollected -ge $NowTime) -AND ([DateTime]$EthLossStats.TimeCollected -ge $NowTime) -AND ([DateTime]$EthErrorStats.TimeCollected -ge $NowTime)) {
+		$Details.Sync = $True
+	} Else {
+		$Details.Sync = "False - Review times statistics were collected"
+	}
+	
+	# Offload Details object into PortChanUpTable
+	$PortChanUpTable += $Details
+}
+
+$PortChanUpTable | Sort SwitchId

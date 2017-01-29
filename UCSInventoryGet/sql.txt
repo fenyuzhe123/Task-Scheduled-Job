@@ -1,0 +1,7 @@
+LOAD DATA LOCAL INFILE  'D:/schedule_jobs/UCSInventoryGet/output/import.csv'
+INTO TABLE UCSInventory
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES
+(Ucs,ucs_SN,chassis_ID,chassis_SN,SlotId,usrLbl,Serial,Model,mfgtime,Adaptor,Adaptor_SN,IOM,IOM_SN,CPU,NumOfCpus,NumOfCores,AvailableMemory,Dn,Association,name,CaptureTime)

@@ -1,0 +1,31 @@
+$Title = "Inventory"
+$Header =  "Inventory"
+$Comments = "Includes hardware data underneath each profile"
+$Display = "Table"
+$Author = "Joshua Barton"
+$PluginVersion = 0.1
+$PluginCategory = "UCS"
+
+
+# Start of Settings 
+# End of Settings 
+
+$InventoryTable = @()
+
+# Interate through profiles that are not associated. Add them to the PSObject
+Foreach ($Blade in $Blades) {
+	$Profile = $SvcProfs | Where {$_.Name -eq $Blade.AssignedToDn.Replace("org-root/ls-","")} #Get name from blade, replace prefix. FINISH THIS!!
+	$Details = "" | Select-Object Name, Location, CPU, Cores, Memory, Template
+	$Details.Name = $Profile.Name
+	$Details.Location = $Blade.Dn.Replace("sys/","")
+	$Details.CPU = $Blade.NumOfCpus
+	$Details.Cores = $Blade.NumOfCores
+	$Details.Memory = [int]($Blade.TotalMemory / 1024)
+	$Details.Template = $Profile.SrcTemplName
+
+	# Offload Details object into InventoryTable
+	$InventoryTable += $Details
+}
+
+# Output PSObject back to vCheck
+$InventoryTable

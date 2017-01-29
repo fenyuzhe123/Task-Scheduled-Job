@@ -1,0 +1,25 @@
+WS0034TS14.CitrixTestHost
+opsrst-02
+opsrst-03 
+prod-amsweb-01e.ams.int  01-04
+lvams01.ams.int 01-04
+lvams01.ams.int 01-04
+mwvcws0001
+mwpscws0001
+mevcws0001
+mepscws0001
+mcvcws0001
+mcpscws0001
+mbvcws0001
+mbpscws0001
+mwvro01
+mwvro02
+mwvro03
+mwvrorc01
+mevrorc01
+mcvrorc01
+mbvrorc01
+mwutl1001
+meutl1001
+mcutl1001
+mbutl1001

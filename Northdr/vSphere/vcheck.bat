@@ -1,0 +1,1 @@
+c:\windows\system32\windowspowershell\v1.0\powershell.exe -PSConsoleFile "C:\Program Files (x86)\VMware\Infrastructure\vSphere PowerCLI\vim.psc1" -command "&{D:\schedule_jobs\Northdr\vSphere\vcheck\vCheck.ps1 mbvcws0001.active.tan}"
